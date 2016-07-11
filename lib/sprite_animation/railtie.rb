@@ -1,5 +1,5 @@
 class Railtie < Rails::Railtie
-  initializer "image_zoomer.initialize_zoom_image_helper" do |app|
+  initializer "sprite_animation.initialize_sprite_animation_helper" do |app|
     ActiveSupport.on_load(:action_view) do
       include SpriteAnimation
     end
