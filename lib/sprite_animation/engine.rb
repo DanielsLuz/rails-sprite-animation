@@ -1,3 +1,4 @@
+require 'uri'
 require 'fastimage'
 
 module SpriteAnimation 
