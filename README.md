@@ -1,8 +1,7 @@
 # SpriteAnimation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sprite_animation`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem makes it easy creating animated images in your views given a sprite sheet. Just add it to your project and start animating sprite sheets.
+SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you need. It was made to be as simple as possible. Try it!
 
 ## Installation
 
@@ -14,7 +13,7 @@ gem 'sprite_animation'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -22,7 +21,44 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+SpriteAnimation gem extends your view helpers with one more method: `animated_image`.
+
+`animated_image(image_src, frame_count, params = {})`
+
+**image_src**
+
+The source of the image, just like in [image_tag helper](http://apidock.com/rails/ActionView/Helpers/AssetTagHelper/image_tag).
+Can be a local image or a URL of an image.
+
+**frame_count**
+
+String with the number of frames that your sprite sheet has.
+
+**params**
+
+A hash containing the following optional parameters:
+
+*scale*
+
+Decimal value to resize your frame size. Defaults to 1.
+
+*orientation*
+
+A symbol containing the orientation of your sprite sheet. Can be: `:vertical` or `:horizontal`.
+If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
+
+## Examples
+Using [slim-template](https://github.com/slim-template/slim)
+```
+= animated_image("sample-sheet.png", "10")      # Looks for a sprite sheet located at app/assets/images/ with 10 frames.
+= animated_image("sample-sheet.png", "10", scale: 0.5)      # Same as above, but reducing the frame size to 50% of the original.
+= animated_image("horizontal-sheet.png", "10", orientation: :horizontal)    # Forces the orientation to be horizontal
+= animated_image("http://www.remotesheet.com/sheet.jpg", "12") # Fetches the sprite sheet at the URL and animates it with 12 frames
+```
+
+## Dependencies
+- [jquery-rails](https://github.com/rails/jquery-rails)
+- [fastimage](https://github.com/sdsykes/fastimage)
 
 ## Development
 
