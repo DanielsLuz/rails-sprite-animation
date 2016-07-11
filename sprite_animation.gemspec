@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'sprite_animation/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "sprite_animation"
+  spec.name          = "sprite-animation"
   spec.version       = SpriteAnimation::VERSION
   spec.authors       = ["DanielsLuz"]
   spec.email         = ["danielluz1995@gmail.com"]
@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
 
   spec.add_runtime_dependency "fastimage"
+  spec.add_runtime_dependency "jquery-rails"
 end
