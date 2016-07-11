@@ -8,7 +8,7 @@ SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sprite_animation'
+gem 'sprite-animation'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sprite_animation
+    $ gem install sprite-animation
 
 ## Usage
 
