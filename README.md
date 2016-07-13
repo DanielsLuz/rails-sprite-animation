@@ -1,9 +1,9 @@
 # SpriteAnimation
 
-> Attention please
-> I'm still working on documenting it
-> There are still no tests whatsoever
-> Any contribution would be extremely appreciated
+> Attention please.<br>
+> I'm still working on documenting it.<br>
+> There are still no tests whatsoever.<br>
+> Any contribution would be extremely appreciated.<br>
 
 
 This gem makes it easy creating animated images in your views given a sprite sheet. Just add it to your project and start animating sprite sheets.
