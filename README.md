@@ -31,6 +31,22 @@ Decimal value to resize your frame size. Defaults to 1.
 A symbol containing the orientation of your sprite sheet. Can be: `:vertical` or `:horizontal`.
 If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
 
+## Installation
+Add this line to your application's Gemfile:
+```ruby
+gem 'sprite_animation'
+```
+ 
+Then run
+```ruby
+bundle install
+```
+
+After that, just add the require statement to your `application.js`
+```ruby
+//= require sprite_animation
+```
+
 ## Examples
 Using [slim-template](https://github.com/slim-template/slim)
 ```
