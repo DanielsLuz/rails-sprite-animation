@@ -1,5 +1,8 @@
+require 'uri'
+require 'fastimage'
+
 module SpriteAnimation
-  def animated_image(image_src, frame_count, params = {})
+  def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
 
     img_width, img_height =
