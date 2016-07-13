@@ -1,5 +1,11 @@
 # SpriteAnimation
 
+> Attention please.<br>
+> I'm still working on documenting it.<br>
+> There are still no tests whatsoever.<br>
+> Any contribution would be extremely appreciated.<br>
+
+
 This gem makes it easy creating animated images in your views given a sprite sheet. Just add it to your project and start animating sprite sheets.
 SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you need. It was made to be as simple as possible. Try it!
 
@@ -30,6 +36,22 @@ Decimal value to resize your frame size. Defaults to 1.
 
 A symbol containing the orientation of your sprite sheet. Can be: `:vertical` or `:horizontal`.
 If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
+
+## Installation
+Add this line to your application's Gemfile:
+```ruby
+gem 'sprite_animation'
+```
+ 
+Then run
+```ruby
+bundle install
+```
+
+After that, just add the require statement to your `application.js`
+```ruby
+//= require sprite_animation
+```
 
 ## Examples
 Using [slim-template](https://github.com/slim-template/slim)
