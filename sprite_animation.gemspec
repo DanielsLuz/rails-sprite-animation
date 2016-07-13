@@ -5,6 +5,7 @@ require 'sprite_animation/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "sprite_animation"
+  spec.homepage      = "https://github.com/DanielsLuz/rails-sprite-animation"
   spec.version       = SpriteAnimation::VERSION
   spec.authors       = ["DanielsLuz"]
   spec.email         = ["danielluz1995@gmail.com"]
@@ -30,6 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
 
-  spec.add_runtime_dependency "fastimage"
-  spec.add_runtime_dependency "jquery-rails"
+  spec.add_runtime_dependency "fastimage", "~> 2.0"
+  spec.add_runtime_dependency "jquery-rails", "~> 4.0"
 end
