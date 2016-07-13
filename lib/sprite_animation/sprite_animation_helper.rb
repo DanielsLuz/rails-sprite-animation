@@ -2,26 +2,26 @@ require 'uri'
 require 'fastimage'
 
 module SpriteAnimation
+
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
 
-    img_width, img_height =
-      FastImage.size(parse_image_path(image_src), 
-                     :raise_on_failure => true).map { |d| d*scale }
+    img_width, img_height = ImageSize.size(image_src).map { |d| d*scale }
 
-      orientation = params[:orientation] ||
-        guess_orientation(img_width, img_height)
+    orientation = params[:orientation] ||
+      guess_orientation(img_width, img_height)
 
-      frame =
-        send(orientation,*[img_width,img_height,frame_count])
+    frame =
+      send(orientation,*[img_width,img_height,frame_count])
 
-      image = image_tag(image_url(image_src), class: "animated",
-                        frameCount: frame_count, 
-                        frameLength: frame[:length],
-                        frameSide: frame[:margin],
-                        style: frame[:style])
-      content_tag(:div, image, 
-                  style: animated_div_style(frame[:width],frame[:height]))
+    image = image_tag(image_url(image_src), class: "animated",
+                      frameCount: frame_count, 
+                      frameLength: frame[:length],
+                      frameSide: frame[:margin],
+                      style: frame[:style])
+
+    content_tag(:div, image, 
+                style: animated_div_style(frame[:width],frame[:height]))
   end 
 
   private
@@ -61,7 +61,16 @@ module SpriteAnimation
     img_height > img_width ? :vertical : :horizontal
   end
 
-  def parse_image_path(image_src)
+end
+
+class ImageSize
+  def self.size(image_src)
+    FastImage.size(parse_image_path(image_src), :raise_on_failure => true)
+  end
+
+  private
+
+  def self.parse_image_path(image_src)
     if uri?(image_src)
       image_src
     else
@@ -69,7 +78,7 @@ module SpriteAnimation
     end
   end
 
-  def uri?(string)
+  def self.uri?(string)
     uri = URI.parse(string)
     %w( http https ).include?(uri.scheme)
   rescue URI::BadURIError
