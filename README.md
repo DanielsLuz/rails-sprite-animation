@@ -1,5 +1,11 @@
 # SpriteAnimation
 
+> Attention please
+> I'm still working on documenting it
+> There are still no tests whatsoever
+> Any contribution would be extremely appreciated
+
+
 This gem makes it easy creating animated images in your views given a sprite sheet. Just add it to your project and start animating sprite sheets.
 SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you need. It was made to be as simple as possible. Try it!
 
