@@ -1,7 +1,7 @@
-require 'uri'
-require 'fastimage'
+require_relative 'sprite_animation_util'
 
 module SpriteAnimation
+  include SpriteAnimationUtil
 
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
@@ -59,31 +59,5 @@ module SpriteAnimation
 
   def guess_orientation(img_width, img_height)
     img_height > img_width ? :vertical : :horizontal
-  end
-
-end
-
-class ImageSize
-  def self.size(image_src)
-    FastImage.size(parse_image_path(image_src), :raise_on_failure => true)
-  end
-
-  private
-
-  def self.parse_image_path(image_src)
-    if uri?(image_src)
-      image_src
-    else
-      ::Rails.root.to_s+"/app/assets/images/#{image_src}"
-    end
-  end
-
-  def self.uri?(string)
-    uri = URI.parse(string)
-    %w( http https ).include?(uri.scheme)
-  rescue URI::BadURIError
-    false
-  rescue URI::InvalidURIError
-    false
   end
 end
