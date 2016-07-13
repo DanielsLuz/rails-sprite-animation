@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'sprite_animation/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "sprite-animation"
+  spec.name          = "sprite_animation"
   spec.version       = SpriteAnimation::VERSION
   spec.authors       = ["DanielsLuz"]
   spec.email         = ["danielluz1995@gmail.com"]
