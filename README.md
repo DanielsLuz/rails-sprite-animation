@@ -1,23 +1,10 @@
+# NOT FUNCTIONAL
+# STILL IN DEVELOPMENT
+
 # SpriteAnimation
 
 This gem makes it easy creating animated images in your views given a sprite sheet. Just add it to your project and start animating sprite sheets.
 SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you need. It was made to be as simple as possible. Try it!
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'sprite_animation'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install sprite_animation
 
 ## Usage
 
