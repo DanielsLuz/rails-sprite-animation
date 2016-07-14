@@ -26,16 +26,11 @@ String with the number of frames that your sprite sheet has.
 
 **params**
 
-A hash containing the following optional parameters:
+An optional hash containing the following parameters:
 
-*scale*
-
-Decimal value to resize your frame size. Defaults to 1.
-
-*orientation*
-
-A symbol containing the orientation of your sprite sheet. Can be: `:vertical` or `:horizontal`.
-If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
+* scale: Decimal value to resize your frame size. Defaults to 1.
+* orientation: A symbol containing the orientation of your sprite sheet. <br>Can be: `:vertical` or `:horizontal`.
+ If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
 
 ## Installation
 Add this line to your application's Gemfile:
