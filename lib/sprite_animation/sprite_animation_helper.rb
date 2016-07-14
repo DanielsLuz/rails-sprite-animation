@@ -3,6 +3,15 @@ require_relative 'sprite_animation_util'
 module SpriteAnimation
   include SpriteAnimationUtil
 
+  # Returns an image_tag inside a div, an populates the image
+  # with data so it can be animated via javascript
+  # Params:
+  # +image_src+:: a sprite sheet source, just as you would pass to image_tag
+  # +frame_count+:: a string representing the number of frames for the sheet
+  # +params+:: a hash containing two optional parameters for the animation
+  ##- +scale+:: a decimal number that will multiply the frame size. Default: 1
+  ##- +orientation+:: a symbol representing the orientation of your sheet.
+  ## Can be: :vertical or :horizontal. If not given, it will try to guess.
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
 

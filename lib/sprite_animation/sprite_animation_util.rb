@@ -1,7 +1,7 @@
 require 'fastimage'
 require 'uri'
 
-module SpriteAnimationUtil
+module SpriteAnimationUtil #:nodoc: all
   class ImageSize
     def self.size(image_src)
       FastImage.size(parse_image_path(image_src), :raise_on_failure => true)
