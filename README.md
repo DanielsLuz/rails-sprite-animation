@@ -14,9 +14,9 @@ SpriteAnimation gem encapsulates all the javascript, jquery and rails logic you 
 
 ## Usage
 
-SpriteAnimation gem extends your view helpers with one more method: `animated_image`.
+SpriteAnimation gem extends your view helpers with one more method: `animate_sprite`.
 
-`animated_image(image_src, frame_count, params = {})`
+`animate_sprite(image_src, frame_count, params = {})`
 
 **image_src**
 
@@ -54,10 +54,10 @@ After that, just add the require statement to your `application.js`
 ## Examples
 Using [slim-template](https://github.com/slim-template/slim)
 ```
-= animated_image("sample-sheet.png", "10")      # Looks for a sprite sheet located at app/assets/images/ with 10 frames.
-= animated_image("sample-sheet.png", "10", scale: 0.5)      # Same as above, but reducing the frame size to 50% of the original.
-= animated_image("horizontal-sheet.png", "10", orientation: :horizontal)    # Forces the orientation to be horizontal
-= animated_image("http://www.remotesheet.com/sheet.jpg", "12") # Fetches the sprite sheet at the URL and animates it with 12 frames
+= animate_sprite("sample-sheet.png", "10")      # Looks for a sprite sheet located at app/assets/images/ with 10 frames.
+= animate_sprite("sample-sheet.png", "10", scale: 0.5)      # Same as above, but reducing the frame size to 50% of the original.
+= animate_sprite("horizontal-sheet.png", "10", orientation: :horizontal)    # Forces the orientation to be horizontal
+= animate_sprite("http://www.remotesheet.com/sheet.jpg", "12") # Fetches the sprite sheet at the URL and animates it with 12 frames
 ```
 
 ## Dependencies
