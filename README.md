@@ -1,6 +1,3 @@
-# NOT FUNCTIONAL
-# WORKING ON IT
-
 # SpriteAnimation
 
 > Attention please.<br>
