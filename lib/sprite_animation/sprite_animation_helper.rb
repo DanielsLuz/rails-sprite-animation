@@ -12,61 +12,123 @@ module SpriteAnimation
   ##- +scale+:: a decimal number that will multiply the frame size. Default: 1
   ##- +orientation+:: a symbol representing the orientation of your sheet.
   ## Can be: :vertical or :horizontal. If not given, it will try to guess.
-  def animate_sprite(image_src, frame_count, params = {})
-    scale = params[:scale] || 1
 
-    img_width, img_height = ImageSize.size(image_src).map { |d| d*scale }
+    def animate_sprite(image_src, frame_count, params = {})
+      scale = params[:scale] || 1
 
-    orientation = params[:orientation] ||
-      guess_orientation(img_width, img_height)
+      frame_rate = params[:frame_rate] || 80
 
-    frame =
-      send(orientation,*[img_width,img_height,frame_count])
+      stop_frame = params[:stop_frame] || 0
+      
+      stop_time = params[:stop_time] || 0
 
-    image = image_tag(image_url(image_src), class: "animated",
-                      frameCount: frame_count, 
-                      frameLength: frame[:length],
-                      frameSide: frame[:margin],
-                      style: frame[:style])
+      img_width, img_height = ImageSize.size(image_src).map {|d| d*scale}
 
-    content_tag(:div, image, 
-                style: animated_div_style(frame[:width],frame[:height]))
-  end 
+      orientation = 
+        params[:orientation] || guess_orientation(img_width, img_height)
+      
+      frame = send(orientation, *[img_width, img_height, frame_count])
 
-  private
+      content_tag(:div, nil, style:animated_div_style(image_src, frame),
+                  class: "animated", 
+                  frameCount: frame_count,
+                  frameRate: frame_rate,
+                  stopFrame: stop_frame,
+                  stopTime: stop_time,
+                  flag: frame[:flag])
+    end
 
-  def animated_div_style(frame_width, frame_height)
-    "width: #{frame_width}px;
-     height: #{frame_height}px;
-     display: block;
-     overflow: hidden"
-  end
+    private
 
-  def horizontal(img_width, img_height, frame_count)
-    frame_width = img_width / frame_count.to_i
-    frame_height = img_height
-    {
-      width: frame_width,
-      height: frame_height,
-      margin: "left",
-      length: frame_width,
-      style: "height: " + img_height.to_s + "px"
-    }
-  end
+    def animated_div_style(image_src, frame)
+       "width: #{frame[:width]}px;
+        height: #{frame[:height]}px;
+        display: block;
+        background: url(\"assets/#{image_src}\");
+        overflow: hidden;"  
+    end
 
-  def vertical(img_width, img_height, frame_count)
-    frame_width = img_width
-    frame_height = img_height / frame_count.to_i
-    {
-      width: frame_width,
-      height: frame_height,
-      margin: "top",
-      length: frame_height,
-      style: "width: " + img_width.to_s + "px"
-    }
-  end
+    def horizontal(img_width, img_height, frame_count)
+      frame_width = img_width / frame_count.to_i
+      frame_height = img_height
+      {
+        width: frame_width,
+        height: frame_height,
+        flag: 1
+      }
+    end
 
-  def guess_orientation(img_width, img_height)
-    img_height > img_width ? :vertical : :horizontal
-  end
+    def vertical(img_width, img_height, frame_count)
+      frame_width = img_width
+      frame_height = img_height / frame_count.to_i
+      {   
+        width: frame_width,
+        height: frame_height,
+        flag: 0
+      }
+    end
+
+    def guess_orientation(img_width, img_height)
+      img_width > img_height ? :horizontal : :vertical
+    end
+
 end
+#   def animate_sprite(image_src, frame_count, params = {})
+#     scale = params[:scale] || 1
+
+#     img_width, img_height = ImageSize.size(image_src).map { |d| d*scale }
+
+#     orientation = params[:orientation] ||
+#       guess_orientation(img_width, img_height)
+
+#     frame =
+#       send(orientation,*[img_width,img_height,frame_count])
+
+#     image = image_tag(image_url(image_src), class: "animated",
+#                       frameCount: frame_count, 
+#                       frameLength: frame[:length],
+#                       frameSide: frame[:margin],
+#                       style: frame[:style])
+
+#     content_tag(:div, image, 
+#                 style: animated_div_style(frame[:width],frame[:height]))
+#   end 
+
+#   private
+
+#   def animated_div_style(image_src ,frame_width, frame_height)
+#     "width: #{frame_width}px;
+#      height: #{frame_height}px;
+#      display: block;
+#      overflow: hidden"
+#   end
+
+#   def horizontal(img_width, img_height, frame_count)
+#     frame_width = img_width / frame_count.to_i
+#     frame_height = img_height
+#     {
+#       width: frame_width,
+#       height: frame_height,
+#       margin: "left",
+#       length: frame_width,
+#       style: "height: " + img_height.to_s + "px"
+#     }
+#   end
+
+#   def vertical(img_width, img_height, frame_count)
+#     frame_width = img_width
+#     frame_height = img_height / frame_count.to_i
+#     {
+#       width: frame_width,
+#       height: frame_height,
+#       margin: "top",
+#       length: frame_height,
+#       style: "width: " + img_width.to_s + "px"
+#     }
+#   end
+
+#   def guess_orientation(img_width, img_height)
+#     img_height > img_width ? :vertical : :horizontal
+#   end
+# end
+
