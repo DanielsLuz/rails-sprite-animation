@@ -71,5 +71,4 @@ module SpriteAnimation
     def guess_orientation(img_width, img_height)
       img_width > img_height ? :horizontal : :vertical
     end
-
 end
