@@ -18,7 +18,7 @@ module SpriteAnimation
 
       frame_rate = params[:frame_rate] || 80
 
-      stop_frame = params[:stop_frame] || 0
+      stop_frame = params[:stop_frame] || nil
       
       stop_time = params[:stop_time] || 0
 
@@ -54,7 +54,7 @@ module SpriteAnimation
       {
         width: frame_width,
         height: frame_height,
-        flag: 1
+        flag: "true"
       }
     end
 
@@ -64,7 +64,7 @@ module SpriteAnimation
       {   
         width: frame_width,
         height: frame_height,
-        flag: 0
+        flag: "false"
       }
     end
 

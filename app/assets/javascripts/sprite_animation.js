@@ -1,46 +1,44 @@
-function sleep(milliseconds) {
+var animate = function(i, element) {
+  var cont = 0;
+  var frameWidth = $(element).width();
+  var frameCount = $(element).attr("frameCount");
+  var horizontal = $(element).attr("flag");
+
+  var frameRate = $(element).attr("frameRate");
+  var stopFrame = $(element).attr("stopFrame");
+  var stopTime = $(element).attr("stopTime");
+
+  var sleep = function (milliseconds) {
     var start = new Date().getTime();
     for (var i = 0; i < 1e7; i++) {
-        if((new Date().getTime() - start) > milliseconds) {
-            break;
-        }
+      if((new Date().getTime() - start) > milliseconds) {
+        break;
+      }
     }
-}
+  }
 
-var animate = function(element, frameWidth) {
-    var cont = 0;
-    var stopFrame = $(element).attr("stopFrame");
-    var stopTime = $(element).attr("stopTime");
-    var frameCount = $(element).attr("frameCount");
-    var frameRate = $(element).attr("frameRate");
-    var flag = $(element).attr("flag");
-    
-    var rollimage = function() {
-        var margin_size = -1 * (cont*frameWidth);
-        console.log(flag);
-        if(flag == 1){
-          style = margin_size+'px 0px'; //horizontal
-        }
-        else{
-          style = '0px '+margin_size+'px'
-        }
-        console.log(style);
-        $(element).css('background-position', style);
-        cont++;
-        
-        if(stopFrame != false && cont == stopFrame){
-            sleep(stopTime);
-        }
-        if(cont == frameCount){
-            cont = 0;
-        }
+  var rollImage = function() {
+    var margin_size = -1 * (cont*frameWidth);
+    if(horizontal){
+      style = margin_size+'px 0px'; //horizontal
     }
-    setInterval(rollimage, frameRate);
-}
+    else{
+      style = '0px '+margin_size+'px'
+    }
 
-$(document).ready(function() {
-    $("div[class^='animated']").each(function(i, div) {
-        frameWidth = $(div).width();
-        animate(div, frameWidth);
-    });
+    $(element).css('background-position', style);
+
+    if(cont == stopFrame){
+      sleep(stopTime);
+    }
+
+    cont++;
+    if(cont == frameCount){
+      cont = 0;
+    }
+  }
+  setInterval(rollImage, frameRate);
+}
+$(function(){
+  $("div[class^='animated']").each(animate);
 })
