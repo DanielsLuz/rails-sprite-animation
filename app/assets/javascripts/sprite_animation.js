@@ -1,35 +1,30 @@
 var animate = function(i, element) {
-  var cont = 0;
   var frameWidth = $(element).width();
   var frameCount = $(element).attr("frameCount");
   var horizontal = $(element).attr("flag");
+  console.log(Boolean(horizontal))
 
   var frameRate = $(element).attr("frameRate");
   var stopFrame = $(element).attr("stopFrame");
   var stopTime = $(element).attr("stopTime");
 
-  var sleep = function (milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if((new Date().getTime() - start) > milliseconds) {
-        break;
-      }
-    }
-  }
+  var handle;
 
+  var cont = 0;
   var rollImage = function() {
     var margin_size = -1 * (cont*frameWidth);
-    if(horizontal){
+ 
+    if(horizontal == 1){
       style = margin_size+'px 0px'; //horizontal
-    }
-    else{
-      style = '0px '+margin_size+'px'
+    } else {
+      style = '0px '+margin_size+'px';
     }
 
     $(element).css('background-position', style);
 
     if(cont == stopFrame){
-      sleep(stopTime);
+      clearInterval(handle);
+      setTimeout(loop, stopTime)
     }
 
     cont++;
@@ -37,7 +32,12 @@ var animate = function(i, element) {
       cont = 0;
     }
   }
-  setInterval(rollImage, frameRate);
+
+  var loop = function(){
+    handle = setInterval(rollImage, frameRate);
+  }
+
+  loop();
 }
 $(function(){
   $("div[class^='animated']").each(animate);
