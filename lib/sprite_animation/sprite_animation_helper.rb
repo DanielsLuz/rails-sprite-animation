@@ -14,27 +14,22 @@ module SpriteAnimation
   ## Can be: :vertical or :horizontal. If not given, it will try to guess.
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
-
     frame_rate = params[:frame_rate] || 80
-    stop_frame = params[:stop_frame] || nil
-    stop_time = params[:stop_time] || 500
 
     img_width, img_height = ImageSize.size(image_src).map {|d| d*scale}
 
     orientation = 
       params[:orientation] || guess_orientation(img_width, img_height)
 
-    frame = send(orientation, *[img_width, img_height, frame_count])
+    frame_width, frame_height, flag = 
+      send(orientation, img_width, img_height, frame_count)
 
-    debugger
     content_tag(:div, nil, 
-                style: div_style(image_src, frame[:width], frame[:height]),
+                style: div_style(image_src, frame_width, frame_height),
                 class: "animated", 
                 frameCount: frame_count,
                 frameRate: frame_rate,
-                stopFrame: stop_frame,
-                stopTime: stop_time,
-                flag: frame[:flag])
+                flag: flag)
   end
 
   private
@@ -50,21 +45,13 @@ module SpriteAnimation
   def horizontal(img_width, img_height, frame_count)
     frame_width = img_width / frame_count.to_i
     frame_height = img_height
-    {
-      width: frame_width,
-      height: frame_height,
-      flag: 1
-    }
+    [frame_width, frame_height, 1]
   end
 
   def vertical(img_width, img_height, frame_count)
     frame_width = img_width
     frame_height = img_height / frame_count.to_i
-    {   
-      width: frame_width,
-      height: frame_height,
-      flag: 0
-    }
+    [frame_width, frame_height, 0]
   end
 
   def guess_orientation(img_width, img_height)
