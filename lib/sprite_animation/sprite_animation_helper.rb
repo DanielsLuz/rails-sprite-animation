@@ -21,7 +21,7 @@ module SpriteAnimation
     orientation = 
       params[:orientation] || guess_orientation(img_width, img_height)
 
-    frame_width, frame_height, flag = 
+    frame_width, frame_height, template = 
       send(orientation, img_width, img_height, frame_count)
 
     content_tag(:div, nil, 
@@ -29,7 +29,7 @@ module SpriteAnimation
                 class: "animated", 
                 frameCount: frame_count,
                 frameRate: frame_rate,
-                flag: flag)
+                template: template)
   end
 
   private
@@ -45,13 +45,13 @@ module SpriteAnimation
   def horizontal(img_width, img_height, frame_count)
     frame_width = img_width / frame_count.to_i
     frame_height = img_height
-    [frame_width, frame_height, 1]
+    [frame_width, frame_height, "[length]px 0px"]
   end
 
   def vertical(img_width, img_height, frame_count)
     frame_width = img_width
     frame_height = img_height / frame_count.to_i
-    [frame_width, frame_height, 0]
+    [frame_width, frame_height, "0px [length]px"]
   end
 
   def guess_orientation(img_width, img_height)

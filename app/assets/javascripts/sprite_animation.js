@@ -3,19 +3,15 @@ var animate = function(i, element) {
   var frameCount = $(element).attr("frameCount");
   var horizontal = $(element).attr("flag");
 
+  var template = $(element).attr("template");
   var frameRate = $(element).attr("frameRate");
 
   var cont = 0;
   var rollImage = function() {
     var margin_size = -1 * (cont*frameLength);
- 
-    if(horizontal == 1){
-      style = margin_size+'px 0px'; //horizontal
-    } else {
-      style = '0px '+margin_size+'px';
-    }
+    position = template.replace("[length]", margin_size);
 
-    $(element).css('background-position', style);
+    $(element).css('background-position', position);
 
     cont++;
     if(cont == frameCount){
