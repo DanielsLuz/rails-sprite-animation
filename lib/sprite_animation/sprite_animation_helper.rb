@@ -12,61 +12,50 @@ module SpriteAnimation
   ##- +scale+:: a decimal number that will multiply the frame size. Default: 1
   ##- +orientation+:: a symbol representing the orientation of your sheet.
   ## Can be: :vertical or :horizontal. If not given, it will try to guess.
+  ##- +frame_rate+:: number of milliseconds to alternate frames. Default: 80.
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
+    frame_rate = params[:frame_rate] || 80
 
-    img_width, img_height = ImageSize.size(image_src).map { |d| d*scale }
+    img_width, img_height = ImageSize.size(image_src).map {|d| d*scale}
 
-    orientation = params[:orientation] ||
-      guess_orientation(img_width, img_height)
+    orientation = 
+      params[:orientation] || guess_orientation(img_width, img_height)
 
-    frame =
-      send(orientation,*[img_width,img_height,frame_count])
+    frame_width, frame_height, template = 
+      send(orientation, img_width, img_height, frame_count)
 
-    image = image_tag(image_url(image_src), class: "animated",
-                      frameCount: frame_count, 
-                      frameLength: frame[:length],
-                      frameSide: frame[:margin],
-                      style: frame[:style])
-
-    content_tag(:div, image, 
-                style: animated_div_style(frame[:width],frame[:height]))
-  end 
+    content_tag(:div, nil, 
+                style: div_style(image_src, frame_width, frame_height),
+                class: "animated", 
+                frameCount: frame_count,
+                frameRate: frame_rate,
+                template: template)
+  end
 
   private
 
-  def animated_div_style(frame_width, frame_height)
+  def div_style(image_src, frame_width, frame_height)
     "width: #{frame_width}px;
-     height: #{frame_height}px;
-     display: block;
-     overflow: hidden"
+    height: #{frame_height}px;
+    background: url(#{image_url(image_src)});
+    display: block;
+    overflow: hidden;"  
   end
 
   def horizontal(img_width, img_height, frame_count)
     frame_width = img_width / frame_count.to_i
     frame_height = img_height
-    {
-      width: frame_width,
-      height: frame_height,
-      margin: "left",
-      length: frame_width,
-      style: "height: " + img_height.to_s + "px"
-    }
+    [frame_width, frame_height, "[length]px 0px"]
   end
 
   def vertical(img_width, img_height, frame_count)
     frame_width = img_width
     frame_height = img_height / frame_count.to_i
-    {
-      width: frame_width,
-      height: frame_height,
-      margin: "top",
-      length: frame_height,
-      style: "width: " + img_width.to_s + "px"
-    }
+    [frame_width, frame_height, "0px [length]px"]
   end
 
   def guess_orientation(img_width, img_height)
-    img_height > img_width ? :vertical : :horizontal
+    img_width > img_height ? :horizontal : :vertical
   end
 end

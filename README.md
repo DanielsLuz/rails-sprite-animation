@@ -28,9 +28,10 @@ String with the number of frames that your sprite sheet has.
 
 An optional hash containing the following parameters:
 
-* scale: Decimal value to resize your frame size. Defaults to 1.
+* scale: Decimal value to resize your frame size. Default: 1.
 * orientation: A symbol containing the orientation of your sprite sheet. <br>Can be: `:vertical` or `:horizontal`.
  If it's not given, SpriteAnimation will try to guess it based on the height and width of your sprite sheet.
+* frame_rate: number of milliseconds to alternate frames. Default: 80.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -53,6 +54,7 @@ Using [slim-template](https://github.com/slim-template/slim)
 ```
 = animate_sprite("sample-sheet.png", "10")      # Looks for a sprite sheet located at app/assets/images/ with 10 frames.
 = animate_sprite("sample-sheet.png", "10", scale: 0.5)      # Same as above, but reducing the frame size to 50% of the original.
+= animate_sprite("sample-sheet.png", "10", frame_rate: 30)      # Alternate frames every 30ms
 = animate_sprite("horizontal-sheet.png", "10", orientation: :horizontal)    # Forces the orientation to be horizontal
 = animate_sprite("http://www.remotesheet.com/sheet.jpg", "12") # Fetches the sprite sheet at the URL and animates it with 12 frames
 ```
@@ -76,3 +78,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/Daniel
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
+## Changelog
+**0.3.0**
+Using CSS background property instead of HTML image tag.
+Added frame_rate parameter.

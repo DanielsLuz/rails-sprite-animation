@@ -1,19 +1,26 @@
-var animate = function(i, img) {
-  var frameCount = $(img).attr("frameCount");
-  var frameLength = $(img).attr("frameLength"); 
-  var frameSide = $(img).attr("frameSide");  
-  var margin = "margin-" + frameSide;
+var animate = function(i, element) {
+  var frameLength = $(element).width();
+  var frameCount = $(element).attr("frameCount");
+  var horizontal = $(element).attr("flag");
+
+  var template = $(element).attr("template");
+  var frameRate = $(element).attr("frameRate");
 
   var cont = 0;
   var rollImage = function() {
-    $(img).css(margin, -1 * (cont*frameLength));  
+    var margin_size = -1 * (cont*frameLength);
+    position = template.replace("[length]", margin_size);
+
+    $(element).css('background-position', position);
+
     cont++;
     if(cont == frameCount){
       cont = 0;
-    }   
+    }
   }
-  setInterval(rollImage, 80);
+
+  setInterval(rollImage, frameRate);
 }
 $(function(){
-  $("img[class^='animated']").each(animate); 
+  $("div[class^='animated']").each(animate);
 })
