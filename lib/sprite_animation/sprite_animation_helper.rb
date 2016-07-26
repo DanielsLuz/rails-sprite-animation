@@ -12,6 +12,7 @@ module SpriteAnimation
   ##- +scale+:: a decimal number that will multiply the frame size. Default: 1
   ##- +orientation+:: a symbol representing the orientation of your sheet.
   ## Can be: :vertical or :horizontal. If not given, it will try to guess.
+  ##- +frame_rate+:: number of milliseconds to alternate frames. Default: 80.
   def animate_sprite(image_src, frame_count, params = {})
     scale = params[:scale] || 1
     frame_rate = params[:frame_rate] || 80
