@@ -1,3 +1,5 @@
+require 'fakeweb'
+
 module SetupFixtures
   PathHere = File.dirname(__FILE__)
   $LOAD_PATH.unshift File.join(PathHere, "..", "lib")

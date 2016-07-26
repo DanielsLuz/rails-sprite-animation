@@ -1,5 +1,4 @@
 require 'rails'
-require 'fakeweb'
 require 'sprite_animation'
 require 'setup_fixtures'
 
