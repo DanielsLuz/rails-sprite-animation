@@ -1,6 +1,8 @@
 require 'spec_helper'
+require 'action_view'
 
 include SpriteAnimation
+include ActionView::Helpers
 
 describe SpriteAnimation do
 
@@ -12,9 +14,13 @@ describe SpriteAnimation do
     end
   end
 
-  context 'calling method' do
-    xit 'should return correct string' do
-      expect(animate_sprite(TestUrl + "coin1.png", "10")).to be_equal("empty")
+  context 'calling animate_sprite' do
+    it 'should return correct string' do
+      allow_any_instance_of(ActionView::Helpers)
+        .to receive(:content_tag)
+        .and_return("empty")
+
+      expect(animate_sprite(TestUrl + "coin1.png", "10")).to eq("empty")
     end
   end
 end
